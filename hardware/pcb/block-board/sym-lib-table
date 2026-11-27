@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "openflaps")(type "KiCad")(uri "${KIPRJMOD}/openflaps.kicad_sym")(options "")(descr "OpenFlaps parts"))
+)
