@@ -152,7 +152,7 @@ FP_C = "Capacitor_SMD:C_0603_1608Metric"
 mcu_nets = {
     "1": "+3V3", "17": "+3V3", "16": "GND", "32": "GND",
     "4": "NRST", "31": "BOOT0", "23": "SWDIO", "24": "SWCLK",
-    "9": "RX", "8": "TX", "28": "LED_SPI", "20": None,
+    "9": "RX", "8": "TX", "28": "LED_SPI", "20": "PA10",
     # motor coils: Mn_1..Mn_4 go to ULN2003 inputs I1..I4
     "2": "M1_1", "3": "M1_2", "5": "M1_3", "6": "M1_4",
     "7": "M2_1", "10": "M2_2", "11": "M2_3", "12": "M2_4",
@@ -221,6 +221,12 @@ for k, net in enumerate(["+3V3", "GND", "SWDIO", "SWCLK", "NRST", "BOOT0"]):
     part(f"TP{k + 1}", "Connector:TestPoint", net, "TestPoint:TestPoint_Pad_D1.5mm", "",
          (152.4 + k * 12.7, 198.12), {"1": net})
 
+# Expansion header, not fitted: the spare pin plus the signals worth probing
+part("J11", "Connector_Generic:Conn_01x06", "EXPANSION (DNP)",
+     "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical", "", (101.6, 180.34),
+     {"1": "+3V3", "2": "PA10", "3": "RX", "4": "TX", "5": "LED_SPI", "6": "GND"})
+DNP = {"J11"}
+
 # ERC: nets fed only by connectors need a power flag
 part("#FLG1", "power:PWR_FLAG", "PWR_FLAG", "", "", (30.48, 63.5), {"1": "+5V"})
 part("#FLG2", "power:PWR_FLAG", "PWR_FLAG", "", "", (40.64, 63.5), {"1": "GND"})
@@ -264,7 +270,7 @@ def emit():
         pin_uuids = " ".join(f'(pin "{n}" (uuid {uid(ref, "pin", n)}))' for n in pins)
         out.append(
             f'  (symbol (lib_id "{lib_id}") (at {fmt(sx)} {fmt(sy)} 0) (unit 1) (in_bom {"no" if power else "yes"}) '
-            f'(on_board {"no" if power else "yes"}) (dnp no) (uuid {uid(ref)})\n    ' + "\n    ".join(props) +
+            f'(on_board {"no" if power else "yes"}) (dnp {"yes" if ref in DNP else "no"}) (uuid {uid(ref)})\n    ' + "\n    ".join(props) +
             f'\n    {pin_uuids}\n    (instances (project "{PROJECT}" (path "/{ROOT_UUID}" (reference "{ref}") (unit 1))))\n  )\n')
         for num, (lx, ly, rot) in pins.items():
             px, py = sx + lx, sy - ly

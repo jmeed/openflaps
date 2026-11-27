@@ -41,6 +41,7 @@ kicad-cli sch export pdf -o Schematic_Block_Board.pdf openflaps-block.kicad_sch
   The board works turned 180 degrees.
 - **Debug lights**: four WS2812B-2020-V6, one per character, on 5 V, data from SPI1 MOSI
   (PB5) through 33 ohm; a dim green power LED on 3.3 V.
+- **Expansion header J11** (1x6 2.54 mm, not fitted): 3.3 V, PA10, RX, TX, LED data, GND, for a logic analyser or a future add-on.
 - **Flashing**: SWDIO, SWCLK, NRST, BOOT0, 3.3 V and GND on pogo pads. BOOT0 has a 10k
   pull-down.
 
@@ -56,7 +57,7 @@ kicad-cli sch export pdf -o Schematic_Block_Board.pdf openflaps-block.kicad_sch
 | 9, 8 | PA3, PA2 | USART1 RX, TX (AF1) |
 | 28 | PB5 | SPI1 MOSI (AF0), WS2812 data |
 | 23, 24, 4, 31 | PA13, PA14, PF2, PF4 | SWDIO, SWCLK, NRST, BOOT0 |
-| 20 | PA10 | spare |
+| 20 | PA10 | spare, on the expansion header J11 |
 
 The motor pins are grouped by package side for routing and may be reshuffled
 during layout.
