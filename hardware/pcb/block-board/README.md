@@ -1,5 +1,8 @@
 # Block Board (v0.2 draft)
 
+> Shelved (2026-11-27): the build moved to DrewFerg11's enclosures, which take one board
+> per character. See [`../char-board/`](../char-board/). Kept for the circuit and pin map.
+
 A low-cost replacement for the Controller and Daisy Chain boards: **one board per
 4 characters**, driving four 28BYJ-48 steppers from one Puya PY32F030K28T6. Boards
 are chained with a 3.3 V UART ring to a Raspberry Pi. Design notes and costs:
@@ -35,7 +38,7 @@ kicad-cli sch export pdf -o Schematic_Block_Board.pdf openflaps-block.kicad_sch
 - **Motors**: four ULN2003A, inputs from the MCU, outputs to JST XH 5-pin stepper
   connectors (pin 5 = +5 V, the motor's red wire), COM to +5 V for the flyback clamp.
 - **Hall sensors (homing)**: one JST PH 3-pin header per character (B3B-PH-K, C2320), pinout
-  `+5V GND OUT`, for an A3144/WSH130 unipolar hall sensor and a drum magnet (DrewFerg11
+  `OUT GND +5V` (same order as DrewFerg11's board, so his sensor leads plug in), for an A3144/WSH130 unipolar hall sensor and a drum magnet (DrewFerg11
   mechanics). The sensor runs on 5 V (A3144 needs 4.5 V or more); its open-collector output
   is pulled up to 3.3 V with 10k, so the MCU never sees 5 V. 100 nF filter on each input.
 - **Ring link**: identical 6-pin JST XH at both ends, pinout `+5V GND DATA RETURN GND +5V`.

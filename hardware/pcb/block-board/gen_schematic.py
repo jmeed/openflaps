@@ -205,7 +205,7 @@ for n in range(1, 5):
     part(f"C{n + 6}", "Device:C", "100nF", FP_C, "C14663", (294.64, y + 25.4), {"1": "+5V", "2": "GND"})
     part(f"J{n + 6}", "Connector_Generic:Conn_01x03", f"HALL {n}",
          "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical", "C2320", (350.52, y),
-         {"1": "+5V", "2": "GND", "3": f"HALL{n}"})
+         {"1": f"HALL{n}", "2": "GND", "3": "+5V"})
     part(f"C{n + 10}", "Device:C", "100nF", FP_C, "C14663", (365.76, y + 15.24), {"1": f"HALL{n}", "2": "GND"})
     part(f"R{n + 5}", "Device:R", "10k", FP_R, "C25804", (381.0, y + 15.24), {"1": "+3V3", "2": f"HALL{n}"})
 
@@ -237,7 +237,7 @@ NOTES = [
     ((22.86, 86.36), "Ring link. Same mirrored pinout at both ends. Bridge JP1 on the last board only."),
     ((22.86, 38.1), "Power: 5 V for motors and LEDs, 3.3 V LDO for the MCU"),
     ((127.0, 81.28), "MCU: pins 1/17 to 3V3, 32 to GND, so K1 or K2 pinout works"),
-    ((246.38, 17.78), "Motor drivers, stepper connectors (pin 5 = +5 V, red) and hall sensors (PH 3-pin: 5V, GND, OUT)"),
+    ((246.38, 17.78), "Motor drivers, stepper connectors (pin 5 = +5 V, red) and hall sensors (PH 3-pin: OUT, GND, 5V, as Drew)"),
     ((22.86, 205.74), "Debug LEDs, one per character (WS2812B-2020-V6, 3.3 V data OK at 5 V supply)"),
     ((147.32, 182.88), "Pogo pads for SWD flashing (bottom side)"),
 ]

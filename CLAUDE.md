@@ -16,7 +16,7 @@ firmware/pico/        # MicroPython: HTTP server, I2C master, web UI
 firmware/attiny84/    # Arduino C++: I2C slave, stepper motor control
 mechanical/stl/       # 3D-printable STL files
 mechanical/           # PRINT-GUIDE.md assembly instructions
-hardware/pcb/         # Gerbers, BOMs, pick-and-place, schematics, renders: controller (per character), daisy-chain (per 4), pico-controller; block-board/ = draft low-cost PY32 replacement (KiCad, schematic only)
+hardware/pcb/         # Gerbers, BOMs, pick-and-place, schematics, renders: controller (per character), daisy-chain (per 4), pico-controller; block-board/ = draft PY32 board per 4 characters for the old Frame (shelved); char-board/ = draft PY32 board per character for DrewFerg11 enclosures (KiCad, placed, not routed)
 frontend/             # Vite + Preact SPA (source for the web UI)
 tools/                # Python utilities: character flap 3MF generator, assembly guide generator, release script (builds to gitignored release/)
 ```
