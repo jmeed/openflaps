@@ -1,4 +1,4 @@
-# Block Board (v0.1 draft)
+# Block Board (v0.2 draft)
 
 A low-cost replacement for the Controller and Daisy Chain boards: **one board per
 4 characters**, driving four 28BYJ-48 steppers from one Puya PY32F030K28T6. Boards
@@ -34,7 +34,10 @@ kicad-cli sch export pdf -o Schematic_Block_Board.pdf openflaps-block.kicad_sch
   works; the firmware must leave PB2 and PB8 as inputs.
 - **Motors**: four ULN2003A, inputs from the MCU, outputs to JST XH 5-pin stepper
   connectors (pin 5 = +5 V, the motor's red wire), COM to +5 V for the flyback clamp.
-- **Limit switches**: 2-pin headers to MCU inputs (internal pull-up) with a 100 nF filter.
+- **Hall sensors (homing)**: one JST PH 3-pin header per character (B3B-PH-K, C2320), pinout
+  `+5V GND OUT`, for an A3144/WSH130 unipolar hall sensor and a drum magnet (DrewFerg11
+  mechanics). The sensor runs on 5 V (A3144 needs 4.5 V or more); its open-collector output
+  is pulled up to 3.3 V with 10k, so the MCU never sees 5 V. 100 nF filter on each input.
 - **Ring link**: identical 6-pin JST XH at both ends, pinout `+5V GND DATA RETURN GND +5V`.
   DATA_IN goes to USART1 RX, USART1 TX to DATA_OUT, each through 100 ohm. RETURN is a
   straight trace. Bridge **JP1** on the last board of a chain to loop DATA back on RETURN.
@@ -53,7 +56,7 @@ kicad-cli sch export pdf -o Schematic_Block_Board.pdf openflaps-block.kicad_sch
 | 7, 10, 11, 12 | PA1, PA4, PA5, PA6 | Motor 2 coils 1-4 |
 | 13, 14, 15, 18 | PA7, PB0, PB1, PA8 | Motor 3 coils 1-4 |
 | 21, 22, 25, 26 | PA11, PA12, PA15, PB3 | Motor 4 coils 1-4 |
-| 27, 29, 30, 19 | PB4, PB6, PB7, PA9 | Limit switches 1-4 |
+| 27, 29, 30, 19 | PB4, PB6, PB7, PA9 | Hall sensors 1-4 (active low) |
 | 9, 8 | PA3, PA2 | USART1 RX, TX (AF1) |
 | 28 | PB5 | SPI1 MOSI (AF0), WS2812 data |
 | 23, 24, 4, 31 | PA13, PA14, PF2, PF4 | SWDIO, SWCLK, NRST, BOOT0 |
